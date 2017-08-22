@@ -119,3 +119,15 @@ public function testSpy()
     $this->assertSame(3, $log->result);
 }
 ```
+
+## Autoload
+
+It is a good idea to separate the Fake class in the same namespace into different `tests/Fake` folder. Add `autoload-dev` section into `composer.json` for that.
+
+```json
+"autoload-dev": {
+    "psr-4": {
+        "MyVendor\\MyProject\\": "tests/Fake"
+    }
+},
+```
