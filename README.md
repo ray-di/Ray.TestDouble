@@ -1,4 +1,7 @@
 # Ray.TestDouble 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bearsunday/BEAR.Package/badges/quality-score.png?b=1.x)](https://scrutinizer-ci.com/g/bearsunday/BEAR.Package/?branch=1.x)
+[![Code Coverage](https://scrutinizer-ci.com/g/bearsunday/BEAR.Package/badges/coverage.png?b=1.x)](https://scrutinizer-ci.com/g/bearsunday/BEAR.Package/?branch=1.x)
+[![Build Status](https://travis-ci.org/ray-di/Ray.TestDouble.svg?branch=1.x)](https://travis-ci.org/ray-di/Ray.TestDouble)
 
 An AOP powered test double framework
 
