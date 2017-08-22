@@ -12,6 +12,17 @@ use Ray\TestDouble\Annotation\Fakeable;
 class TestDoubleModule extends AbstractModule
 {
     /**
+     * @var array
+     */
+    private $fakeables;
+
+    public function __construct(array $fakeables = [], AbstractModule $module = null)
+    {
+        $this->fakeables = $fakeables;
+        parent::__construct($module);
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function configure()
@@ -21,5 +32,12 @@ class TestDoubleModule extends AbstractModule
             $this->matcher->any(),
             [TestDoubleInterceptor::class]
         );
+        foreach ($this->fakeables as $fakeable) {
+            $this->bindInterceptor(
+                $this->matcher->subclassesOf($fakeable),
+                $this->matcher->any(),
+                [TestDoubleInterceptor::class]
+            );
+        }
     }
 }

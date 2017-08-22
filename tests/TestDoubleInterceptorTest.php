@@ -10,9 +10,17 @@ use Ray\Di\Injector;
 
 class TestDoubleInterceptorTest extends \PHPUnit_Framework_TestCase
 {
-    public function testFakeRequest()
+    public function testAnnotationBinding()
     {
-        $fake = (new Injector(new TestModule))->getInstance(TestClass::class);
+        $fake = (new Injector(new AnnotationBindingModule))->getInstance(TestClass::class);
+        $acutual = $fake->output();
+        $expected = 'fake class output';
+        $this->assertSame($expected, $acutual);
+    }
+
+    public function testClassNameBinding()
+    {
+        $fake = (new Injector(new ClassNameBindingsModule))->getInstance(TestClass::class);
         $acutual = $fake->output();
         $expected = 'fake class output';
         $this->assertSame($expected, $acutual);
