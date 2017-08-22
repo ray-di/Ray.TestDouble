@@ -120,14 +120,14 @@ public function testSpy()
 }
 ```
 
-## Autoload
+# Autoload
 
-It is a good idea to separate the Fake class in the same namespace into different `tests/Fake` folder. Add `autoload-dev` section into `composer.json` for that.
+It is a good idea to separate the Fake class in the same namespace into different like `tests/fake-src` directory. Add `autoload-dev` section to `composer.json` for that.
 
 ```json
 "autoload-dev": {
     "psr-4": {
-        "MyVendor\\MyProject\\": "tests/Fake"
+        "MyVendor\\MyProject\\": "tests/fake-src"
     }
 },
 ```
