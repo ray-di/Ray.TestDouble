@@ -64,7 +64,8 @@ class FakeFoo extend Foo
 ```php
 $fakeable = [
     Foo::class,
-    Bar::class
+    Bar::class,
+    SomeInterface::class // all classes implemetes SomeInterface
 ];
 $this->install(new TestDoubleModule($fakeable));
 
