@@ -25,7 +25,6 @@ class AppModule extends AbstractModule
 
 # Fake a class method
 
-
 There are ways to specify the target class by using the `@Fakeable` annotation or explicitly specifying a list of class names.
 
 Annotate `@Fakeable` annotation for the target. Then, 'Fake' prefixed class in same namespace will be called instead of original class.
@@ -92,7 +91,7 @@ class Calc
 }
 ```
 
-Or manuaally bind with matcher in module.
+Or bind manually using a matcher in the module.
 
 ```php
 $this->bindInterceptor(
