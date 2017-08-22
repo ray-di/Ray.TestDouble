@@ -1,6 +1,6 @@
 # Ray.TestDouble 
 
-A test double suite for Ray.Di
+An AOP powered test double framework
 
 ## Installation
 
@@ -48,19 +48,7 @@ class Foo
 }
 ```
 
-### Explicit class name binding
-
-```php
-$fakeable = [
-    Foo::class,
-    // ...
-    BarInterface::class
-];
-$this->install(new TestDoubleModule($fakeable));
-
-```
-
-### 'Fake' prefixed fake class
+'Fake' prefixed fake class
 
 ```php
 class FakeFoo extend Foo
@@ -71,13 +59,24 @@ class FakeFoo extend Foo
 }
 ```
 
+### Explicit class name binding
+
+```php
+$fakeable = [
+    Foo::class,
+    Bar::class
+];
+$this->install(new TestDoubleModule($fakeable));
+
+```
+
 ## Spy method invocation
 
 A Spy is a test double that records every invocation made against it and can verify certain interactions took place after the fact. 
 
 Annotate `@Spy` to class for all method, or particular method which you want spy.
 
-```
+```php
 use Ray\TestDouble\Annotation\Spy;
 
 /**
@@ -92,7 +91,7 @@ class FakeSpy
 }
 ```
 
-or manuaally bind with matcher in module.
+Or manuaally bind with matcher in module.
 
 ```php
 $this->bindInterceptor(

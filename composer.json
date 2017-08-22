@@ -1,6 +1,6 @@
 {
     "name": "ray/test-double",
-    "description":"A test-double suite for ray/di",
+    "description":"An AOP powered test double framework",
     "keywords":[
         "Ray module",
         "Mock",
