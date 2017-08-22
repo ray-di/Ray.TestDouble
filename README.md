@@ -115,6 +115,7 @@ public function testSpy()
     $this->assertSame(1, count($logs)); // call time
     $log = $logs[0]; // first call log
     /* @var $log SpyLog */
+    // examine input and output
     $this->assertSame([1, 2], $log->arguments);
     $this->assertSame(3, $log->result);
 }
