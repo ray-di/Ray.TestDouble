@@ -2,7 +2,7 @@
     "name": "ray/test-double",
     "description":"A test-double suite for ray/di",
     "keywords":[
-        "ray/di",
+        "Ray module",
         "Mock",
         "Stub",
         "Fake"
