@@ -7,6 +7,7 @@
 namespace Ray\TestDouble;
 
 use Ray\Di\AbstractModule;
+use Ray\Di\Scope;
 use Ray\TestDouble\Annotation\Fakeable;
 
 class TestDoubleModule extends AbstractModule
@@ -27,6 +28,17 @@ class TestDoubleModule extends AbstractModule
      */
     protected function configure()
     {
+        $this->bind(Spy::class)->in(Scope::SINGLETON);
+        $this->bindInterceptor(
+            $this->matcher->annotatedWith(\Ray\TestDouble\Annotation\Spy::class),
+            $this->matcher->any(),
+            [SpyInterceptor::class]
+        );
+        $this->bindInterceptor(
+            $this->matcher->any(),
+            $this->matcher->annotatedWith(\Ray\TestDouble\Annotation\Spy::class),
+            [SpyInterceptor::class]
+        );
         $this->bindInterceptor(
             $this->matcher->annotatedWith(Fakeable::class),
             $this->matcher->any(),

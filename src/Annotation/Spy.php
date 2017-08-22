@@ -4,5 +4,12 @@
  *
  * @license http://opensource.org/licenses/MIT MIT
  */
-require __DIR__ . '/src/Annotation/Fakeable.php';
-require __DIR__ . '/src/Annotation/Spy.php';
+namespace Ray\TestDouble\Annotation;
+
+/**
+ * @Annotation
+ * @Target("CLASS")
+ */
+final class Spy
+{
+}
