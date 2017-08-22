@@ -70,3 +70,53 @@ class FakeFoo extend Foo
     }
 }
 ```
+
+## Spy method invocation
+
+A Spy is a test double that records every invocation made against it and can verify certain interactions took place after the fact. 
+
+Annotate `@Spy` to class for all method, or particular method which you want spy.
+
+```
+use Ray\TestDouble\Annotation\Spy;
+
+/**
+ * @Spy
+ */
+class FakeSpy
+{
+    public function exec($a, $b)
+    {
+        return $a + $b;
+    }
+}
+```
+
+or manuaally bind with matcher in module.
+
+```php
+$this->bindInterceptor(
+    $this->matcher->subclassesOf(FooInterface::class),
+    $this->matcher->any(),
+    [SpyInterceptor::class]
+);
+
+```
+
+```php
+public function testSpy()
+{
+    $injector = new Injector(new TestModule);
+    $foo = $injector->getInstance(Foo::class);
+    $result = $foo->exec(1, 2); // 3
+    $spy = $injector->getInstance(Spy::class);
+    
+    // get spy logs
+    $logs = $spy->getLogs(FakeSpy::class, 'exec');
+    $this->assertSame(1, count($logs)); // call time
+    $log = $logs[0]; // first call log
+    /* @var $log SpyLog */
+    $this->assertSame([1, 2], $log->argument);
+    $this->assertSame(3, $log->result);
+}
+```
