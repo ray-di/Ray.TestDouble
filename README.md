@@ -26,7 +26,11 @@ class AppModule extends AbstractModule
 ## Fake a class method
 
 
+There are ways to specify the target class by using the `@Fakeable` annotation or explicitly specifying a list of class names.
+
 Annotate `@Fakeable` annotation for the target. Then, 'Fake' prefixed class in same namespace will be called instead of original class.
+
+### @Fakeable annotation binding
 
 Actual class
 
@@ -44,7 +48,18 @@ class Foo
 }
 ```
 
-Fake class
+### Explicit class name binding
+
+```php
+$fakeable = [
+    Foo::class,
+    Bar::class
+];
+$this->install(new TestDoubleModule($fakeable));
+
+```
+
+`Fake` prefixed fake class
 
 ```php
 class FakeFoo extend Foo
@@ -54,4 +69,3 @@ class FakeFoo extend Foo
     }
 }
 ```
-

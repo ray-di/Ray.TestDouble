@@ -1,7 +1,7 @@
 <?php
 
 $header = <<<'EOF'
-This file is part of the Ray.FakeModule package.
+This file is part of the Ray.TestDouble package.
 
 @license http://opensource.org/licenses/MIT MIT
 EOF;
@@ -124,7 +124,6 @@ return \PhpCsFixer\Config::create()
     ))
     ->setFinder(
         PhpCsFixer\Finder::create()
-            ->exclude('tests/Fake')
             ->exclude('tests/tmp')
             ->in(__DIR__)
     )->setLineEnding("\n");
