@@ -1,16 +1,16 @@
 <?php
 /**
- * This file is part of the Ray.FakeModule package.
+ * This file is part of the Ray.TestDouble package.
  *
  * @license http://opensource.org/licenses/MIT MIT
  */
-namespace Ray\FakeModule;
+namespace Ray\TestDouble;
 
 use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
 use Ray\Di\InjectorInterface;
 
-class FakeInterceptor implements MethodInterceptor
+class TestDoubleInterceptor implements MethodInterceptor
 {
     /**
      * @var InjectorInterface

@@ -1,22 +1,33 @@
 {
-    "name": "ray/fake-module",
-    "description":"this is Ray.Di module for developing mocking feature.",
+    "name": "ray/test-double",
+    "description":"A test-double suite for ray/di",
     "keywords":[
-      "Ray.Di Module",
-      "Mock",
-      "Stub"
+        "ray/di",
+        "Mock",
+        "Stub",
+        "Fake"
     ],
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Shingo Kumagai",
+            "email": "shingo4092@gmail.com"
+        },
+        {
+            "name": "Akihito Koriyama",
+            "email": "akihito.koriyama@gmail.com"
+        }
+    ],
     "autoload":{
         "psr-4":{
-            "Ray\\FakeModule\\": "src/"
+            "Ray\\TestDouble\\": "src/"
         },
         "files": ["load_annotations.php"],
         "exclude-from-classmap": ["/tests/"]
     },
     "autoload-dev":{
         "psr-4":{
-            "Ray\\FakeModule\\": ["tests/", "tests/Fake"]
+            "Ray\\TestDouble\\": ["tests/", "tests/Fake"]
         }
     },
     "require": {

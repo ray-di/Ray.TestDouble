@@ -1,8 +1,8 @@
 <?php
 
-namespace Ray\FakeModule;
+namespace Ray\TestDouble;
 
-use Ray\FakeModule\Annotation\Fakeable;
+use Ray\TestDouble\Annotation\Fakeable;
 
 /**
  * @Fakeable

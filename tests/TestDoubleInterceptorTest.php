@@ -1,14 +1,14 @@
 <?php
 /**
- * This file is part of the Ray.FakeModule package.
+ * This file is part of the Ray.TestDouble package.
  *
  * @license http://opensource.org/licenses/MIT MIT
  */
-namespace Ray\FakeModule;
+namespace Ray\TestDouble;
 
 use Ray\Di\Injector;
 
-class FakeInterceptorTest extends \PHPUnit_Framework_TestCase
+class TestDoubleInterceptorTest extends \PHPUnit_Framework_TestCase
 {
     public function testFakeRequest()
     {

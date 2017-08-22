@@ -1,6 +1,6 @@
 <?php
 
-namespace Ray\FakeModule;
+namespace Ray\TestDouble;
 
 class FakeTestClass
 {

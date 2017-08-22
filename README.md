@@ -1,25 +1,24 @@
-# Ray.FakeModule 
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/shingo-kumagai/Ray.FakeModule/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/shingo-kumagai/Ray.FakeModule/?branch=master) [![Build Status](https://travis-ci.org/kuma-guy/Ray.FakeModule.svg?branch=1.x)](https://travis-ci.org/kuma-guy/Ray.FakeModule)
+# Ray.TestDouble 
 
-A TestDobule suite for Ray.Di DI framework
+A TestDobule suite for Ray.Di
 
 ## Installation
 
 ### Composer install
 
-    $ composer require ray/fake-module --dev
+    $ composer require ray/fake-module 1.x-dev --dev
     
 ### Module install
 
 ```php
 use Ray\Di\AbstractModule;
-use Ray\FakeModule\FakeModule;
+use Ray\TestDouble\TestDoubleModule;
 
 class AppModule extends AbstractModule
 {
     protected function configure()
     {
-        $this->install(new FakeModule);
+        $this->install(new TestDoubleModule);
     }
 }
 ```
@@ -27,22 +26,20 @@ class AppModule extends AbstractModule
 ## Fake a class method
 
 
-Annotate `@Fabkeable` annotation for the target. Then, 'Fake' prefixed class in same namespace will be called instead of original class.
+Annotate `@Fakeable` annotation for the target. Then, 'Fake' prefixed class in same namespace will be called instead of original class.
 
 Actual class
 
 ```php
-namespace FakeVendor\Sandbox\Module;
-
-use Ray\FakeModule\Annotation\FakeClass;
+use Ray\TestDouble\Annotation\Fakeable;
 
 /**
  * @Fakeable
  */
-class TestClass
+class Foo
 {
-    public function output() {
-        return  "test class output";
+    public function getDate() {
+        return date("Ymd");
     }
 }
 ```
@@ -50,12 +47,10 @@ class TestClass
 Fake class
 
 ```php
-namespace FakeVendor\Sandbox\Module;
-
-class FakeTestClass
+class FakeFoo extend Foo
 {
-    public function output() {
-        return "fake class output";
+    public function getDate() {
+        return '20170801';
     }
 }
 ```
