@@ -1,12 +1,12 @@
 # Ray.TestDouble 
 
-A TestDobule suite for Ray.Di
+A test double suite for Ray.Di
 
 ## Installation
 
 ### Composer install
 
-    $ composer require ray/fake-module 1.x-dev --dev
+    $ composer require ray/test-double 1.x-dev --dev
     
 ### Module install
 
