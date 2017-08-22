@@ -53,13 +53,14 @@ class Foo
 ```php
 $fakeable = [
     Foo::class,
-    Bar::class
+    // ...
+    BarInterface::class
 ];
 $this->install(new TestDoubleModule($fakeable));
 
 ```
 
-`Fake` prefixed fake class
+### 'Fake' prefixed fake class
 
 ```php
 class FakeFoo extend Foo
