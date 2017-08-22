@@ -23,7 +23,7 @@ class AppModule extends AbstractModule
 }
 ```
 
-## Fake a class method
+# Fake a class method
 
 
 There are ways to specify the target class by using the `@Fakeable` annotation or explicitly specifying a list of class names.
@@ -70,7 +70,7 @@ $this->install(new TestDoubleModule($fakeable));
 
 ```
 
-## Spy method invocation
+# Spy method invocation
 
 A Spy is a test double that records every invocation made against it and can verify certain interactions took place after the fact. 
 
@@ -82,7 +82,7 @@ use Ray\TestDouble\Annotation\Spy;
 /**
  * @Spy
  */
-class FakeSpy
+class Foo
 {
     public function exec($a, $b)
     {
@@ -95,7 +95,7 @@ Or manuaally bind with matcher in module.
 
 ```php
 $this->bindInterceptor(
-    $this->matcher->subclassesOf(FooInterface::class),
+    $this->matcher->subclassesOf(Foo::class),
     $this->matcher->any(),
     [SpyInterceptor::class]
 );
@@ -111,11 +111,11 @@ public function testSpy()
     $spy = $injector->getInstance(Spy::class);
     
     // get spy logs
-    $logs = $spy->getLogs(FakeSpy::class, 'exec');
+    $logs = $spy->getLogs(Foo::class, 'exec');
     $this->assertSame(1, count($logs)); // call time
     $log = $logs[0]; // first call log
     /* @var $log SpyLog */
-    $this->assertSame([1, 2], $log->argument);
+    $this->assertSame([1, 2], $log->arguments);
     $this->assertSame(3, $log->result);
 }
 ```
