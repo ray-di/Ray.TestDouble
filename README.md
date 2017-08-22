@@ -82,9 +82,9 @@ use Ray\TestDouble\Annotation\Spy;
 /**
  * @Spy
  */
-class Foo
+class Calc
 {
-    public function exec($a, $b)
+    public function add($a, $b)
     {
         return $a + $b;
     }
@@ -95,7 +95,7 @@ Or manuaally bind with matcher in module.
 
 ```php
 $this->bindInterceptor(
-    $this->matcher->subclassesOf(Foo::class),
+    $this->matcher->subclassesOf(Calc::class),
     $this->matcher->any(),
     [SpyInterceptor::class]
 );
@@ -106,12 +106,12 @@ $this->bindInterceptor(
 public function testSpy()
 {
     $injector = new Injector(new TestModule);
-    $foo = $injector->getInstance(Foo::class);
-    $result = $foo->exec(1, 2); // 3
+    $foo = $injector->getInstance(Calc::class);
+    $result = $foo->add(1, 2); // 3
     $spy = $injector->getInstance(Spy::class);
     
     // get spy logs
-    $logs = $spy->getLogs(Foo::class, 'exec');
+    $logs = $spy->getLogs(Calc::class, 'add');
     $this->assertSame(1, count($logs)); // call time
     $log = $logs[0]; // first call log
     /* @var $log SpyLog */
