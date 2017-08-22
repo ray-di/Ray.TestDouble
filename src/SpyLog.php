@@ -21,7 +21,7 @@ final class SpyLog
     /**
      * @var array
      */
-    public $argument;
+    public $arguments;
 
     /**
      * @var mixed

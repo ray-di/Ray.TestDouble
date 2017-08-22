@@ -24,7 +24,7 @@ final class Spy
         list(
             $spyLog->class,
             $spyLog->method,
-            $spyLog->argument,
+            $spyLog->arguments,
             $spyLog->result,
             $spyLog->time
         ) = [
