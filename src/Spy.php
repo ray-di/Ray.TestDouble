@@ -10,6 +10,9 @@ use Ray\Aop\MethodInvocation;
 
 final class Spy
 {
+    /**
+     * @var array
+     */
     private $logs = [];
 
     public function proceed(MethodInvocation $invocation)
@@ -17,9 +20,6 @@ final class Spy
         $t = microtime(true);
         $result = $invocation->proceed();
         $time = microtime(true) - $t;
-        $class = (new \ReflectionClass($invocation->getThis()))->getParentClass()->getName();
-        $method = $invocation->getMethod()->getName();
-        $args = $invocation->getArguments()->getArrayCopy();
         $spyLog = new SpyLog;
         list(
             $spyLog->class,
@@ -28,13 +28,13 @@ final class Spy
             $spyLog->result,
             $spyLog->time
         ) = [
-            $class,
-            $method,
-            $args,
+            (new \ReflectionClass($invocation->getThis()))->getParentClass()->getName(),
+            $invocation->getMethod()->getName(),
+            $invocation->getArguments()->getArrayCopy(),
             $result,
             $time
         ];
-        $this->logs[$class][$method][] = $spyLog;
+        $this->logs[$spyLog->class][$spyLog->method][] = $spyLog;
 
         return $result;
     }
