@@ -17,9 +17,15 @@ class TestDoubleModule extends AbstractModule
      */
     private $fakeables;
 
-    public function __construct(array $fakeables = [], AbstractModule $module = null)
+    /**
+     * @var array
+     */
+    private $spies;
+
+    public function __construct(array $fakeables = [], array $spies = [], AbstractModule $module = null)
     {
         $this->fakeables = $fakeables;
+        $this->spies = $spies;
         parent::__construct($module);
     }
 
@@ -39,6 +45,13 @@ class TestDoubleModule extends AbstractModule
             $this->matcher->annotatedWith(\Ray\TestDouble\Annotation\Spy::class),
             [SpyInterceptor::class]
         );
+        foreach ($this->spies as $spy) {
+            $this->bindInterceptor(
+                $this->matcher->subclassesOf($spy),
+                $this->matcher->any(),
+                [SpyInterceptor::class]
+            );
+        }
         $this->bindInterceptor(
             $this->matcher->annotatedWith(Fakeable::class),
             $this->matcher->any(),

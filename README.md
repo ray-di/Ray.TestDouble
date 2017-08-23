@@ -105,6 +105,12 @@ $this->bindInterceptor(
 
 ```
 
+Also with module.
+
+```
+$this->install(new TestDoubleModule($fakeable, $spies));
+```
+
 ```php
 public function testSpy()
 {
