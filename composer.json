@@ -1,6 +1,14 @@
 {
     "name": "ray/test-double",
     "description":"An AOP powered test double framework",
+    "type": "library",
+    "require": {
+        "php": ">=7.1.0",
+        "ray/di": "^2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.7"
+    },
     "keywords":[
         "Ray module",
         "Mock",
@@ -29,12 +37,6 @@
         "psr-4":{
             "Ray\\TestDouble\\": ["tests/", "tests/Fake"]
         }
-    },
-    "require": {
-        "ray/di": "^2.0"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^5.7"
     },
     "scripts" :{
         "test": ["phpunit"],
