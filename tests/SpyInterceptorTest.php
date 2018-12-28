@@ -19,7 +19,7 @@ class SpyInterceptorTest extends \PHPUnit_Framework_TestCase
         /* @var $spy Spy */
         $result = $fake->exec(1, 2);
         $logs = $spy->getLogs(FakeSpy::class, 'exec');
-        $this->assertSame(1, count($logs));
+        $this->assertCount(1, $logs);
         $log = $logs[0];
         /* @var $log \Ray\TestDouble\SpyLog */
         $this->assertSame(FakeSpy::class, $log->class);
