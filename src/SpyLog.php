@@ -29,7 +29,7 @@ final class SpyLog
     public $result;
 
     /**
-     * @var fl
+     * @var float
      */
     public $time;
 }
