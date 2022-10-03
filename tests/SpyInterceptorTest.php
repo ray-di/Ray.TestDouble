@@ -6,9 +6,10 @@
  */
 namespace Ray\TestDouble;
 
+use PHPUnit\Framework\TestCase;
 use Ray\Di\Injector;
 
-class SpyInterceptorTest extends \PHPUnit_Framework_TestCase
+class SpyInterceptorTest extends TestCase
 {
     public function testSpy()
     {
@@ -26,6 +27,6 @@ class SpyInterceptorTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('exec', $log->method);
         $this->assertSame([1, 2], $log->arguments);
         $this->assertSame(3, $log->result);
-        $this->assertInternalType('float', $log->time);
+        $this->assertIsFloat($log->time);
     }
 }

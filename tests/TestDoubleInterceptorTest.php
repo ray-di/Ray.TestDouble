@@ -6,9 +6,10 @@
  */
 namespace Ray\TestDouble;
 
+use PHPUnit\Framework\TestCase;
 use Ray\Di\Injector;
 
-class TestDoubleInterceptorTest extends \PHPUnit_Framework_TestCase
+class TestDoubleInterceptorTest extends TestCase
 {
     public function testAnnotationBinding()
     {
