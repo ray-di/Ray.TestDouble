@@ -6,10 +6,10 @@
  */
 namespace Ray\TestDouble;
 
-class FakeTestClass
+class FakeTarget
 {
-    public function output()
+    public function exec($a, $b)
     {
-        return 'fake class output';
+        return $a + $b;
     }
 }

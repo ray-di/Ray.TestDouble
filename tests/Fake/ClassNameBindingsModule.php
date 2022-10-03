@@ -12,10 +12,10 @@ class ClassNameBindingsModule extends AbstractModule
 {
     protected function configure()
     {
-        $this->bind(TestClass::class);
-        $fakeable = [
-            NotAnnotated::class
+        $this->bind(FakeTarget::class);
+        $spyTargets = [
+            FakeTarget::class
         ];
-        $this->install(new TestDoubleModule($fakeable));
+        $this->install(new TestDoubleModule($spyTargets));
     }
 }

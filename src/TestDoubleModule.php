@@ -8,24 +8,17 @@ namespace Ray\TestDouble;
 
 use Ray\Di\AbstractModule;
 use Ray\Di\Scope;
-use Ray\TestDouble\Annotation\Fakeable;
 
 class TestDoubleModule extends AbstractModule
 {
     /**
      * @var array
      */
-    private $fakeables;
+    private $spyTargets;
 
-    /**
-     * @var array
-     */
-    private $spies;
-
-    public function __construct(array $fakeables = [], array $spies = [], AbstractModule $module = null)
+    public function __construct(array $spies = [], AbstractModule $module = null)
     {
-        $this->fakeables = $fakeables;
-        $this->spies = $spies;
+        $this->spyTargets = $spies;
         parent::__construct($module);
     }
 
@@ -35,33 +28,11 @@ class TestDoubleModule extends AbstractModule
     protected function configure()
     {
         $this->bind(Spy::class)->in(Scope::SINGLETON);
-        $this->bindInterceptor(
-            $this->matcher->annotatedWith(\Ray\TestDouble\Annotation\Spy::class),
-            $this->matcher->any(),
-            [SpyInterceptor::class]
-        );
-        $this->bindInterceptor(
-            $this->matcher->any(),
-            $this->matcher->annotatedWith(\Ray\TestDouble\Annotation\Spy::class),
-            [SpyInterceptor::class]
-        );
-        foreach ($this->spies as $spy) {
+        foreach ($this->spyTargets as $spy) {
             $this->bindInterceptor(
                 $this->matcher->subclassesOf($spy),
                 $this->matcher->any(),
                 [SpyInterceptor::class]
-            );
-        }
-        $this->bindInterceptor(
-            $this->matcher->annotatedWith(Fakeable::class),
-            $this->matcher->any(),
-            [TestDoubleInterceptor::class]
-        );
-        foreach ($this->fakeables as $fakeable) {
-            $this->bindInterceptor(
-                $this->matcher->subclassesOf($fakeable),
-                $this->matcher->any(),
-                [TestDoubleInterceptor::class]
             );
         }
     }

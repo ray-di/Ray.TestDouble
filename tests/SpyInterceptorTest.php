@@ -13,17 +13,17 @@ class SpyInterceptorTest extends TestCase
 {
     public function testSpy()
     {
-        $injector = new Injector(new FakeSpyModule, __DIR__ . '/tmp');
-        $fake = $injector->getInstance(FakeSpy::class);
-        /* @var $fake FakeSpy */
+        $injector = new Injector(new ClassNameBindingsModule, __DIR__ . '/tmp');
+        $fake = $injector->getInstance(FakeTarget::class);
+        /* @var $fake FakeTarget */
         $spy = $injector->getInstance(Spy::class);
         /* @var $spy Spy */
-        $result = $fake->exec(1, 2);
-        $logs = $spy->getLogs(FakeSpy::class, 'exec');
+        $fake->exec(1, 2);
+        $logs = $spy->getLogs(FakeTarget::class, 'exec');
         $this->assertCount(1, $logs);
         $log = $logs[0];
         /* @var $log \Ray\TestDouble\SpyLog */
-        $this->assertSame(FakeSpy::class, $log->class);
+        $this->assertSame(FakeTarget::class, $log->class);
         $this->assertSame('exec', $log->method);
         $this->assertSame([1, 2], $log->arguments);
         $this->assertSame(3, $log->result);
