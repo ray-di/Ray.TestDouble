@@ -29,9 +29,7 @@
     "autoload":{
         "psr-4":{
             "Ray\\TestDouble\\": "src/"
-        },
-        "files": ["load_annotations.php"],
-        "exclude-from-classmap": ["/tests/"]
+        }
     },
     "autoload-dev":{
         "psr-4":{
