@@ -63,10 +63,10 @@ class SpyModuleTest extends TestCase
         $this->assertLog($fake, $injector);
     }
 
-    public function testInvalidClass()
+    public function testInvalidClass(): void
     {
         $this->expectException(InvalidSpyTargetException::class);
-        new SpyModule(['__INVALID__']);
+        new SpyModule(['__INVALID__']); // @phpstan-ignore-line
     }
 
     private function assertLog(FakeAddInterface $fake, Injector $injector): void
