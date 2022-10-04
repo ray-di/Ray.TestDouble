@@ -7,6 +7,7 @@ namespace Ray\TestDouble;
 use PHPUnit\Framework\TestCase;
 use Ray\Di\AbstractModule;
 use Ray\Di\Injector;
+use Ray\TestDouble\Exception\InvalidSpyTargetException;
 
 class SpyModuleTest extends TestCase
 {
@@ -62,6 +63,12 @@ class SpyModuleTest extends TestCase
         $this->assertLog($fake, $injector);
     }
 
+    public function testInvalidClass()
+    {
+        $this->expectException(InvalidSpyTargetException::class);
+        new SpyModule(['__INVALID__']);
+    }
+
     private function assertLog(FakeAddInterface $fake, Injector $injector): void
     {
         $spyLog = $injector->getInstance(LoggerInterface::class);
@@ -74,5 +81,6 @@ class SpyModuleTest extends TestCase
         $this->assertSame([1, 2], $log->arguments);
         $this->assertSame(1, $log->namedArguments['a']);
         $this->assertIsFloat($log->time);
+        $this->assertSame([], $spyLog->getLogs(FakeAdd::class, '__toString'));
     }
 }

@@ -25,6 +25,8 @@ class IsInterfaceMatcher extends AbstractMatcher
 
     /**
      * {@inheritdoc}
+     *
+     * @codeCoverageIgnore
      */
     public function matchesMethod(ReflectionMethod $method, array $arguments): bool
     {
