@@ -23,7 +23,7 @@ You can do it directly with `newInstance` or specify it with a binding.
 ```php
 $spyLog = new SpyLog();
 $spy = (new Spy())->newInstance(Foo::class, 'add', $spyLog);
-// $spy records the 'add' method cal
+// $spy records the 'add' method call
 ```
 
 ### By SpyModule
