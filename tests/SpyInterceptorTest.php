@@ -1,28 +1,59 @@
 <?php
-/**
- * This file is part of the Ray.TestDouble package.
- *
- * @license http://opensource.org/licenses/MIT MIT
- */
+
+declare(strict_types=1);
+
 namespace Ray\TestDouble;
 
 use PHPUnit\Framework\TestCase;
+use Ray\Di\AbstractModule;
 use Ray\Di\Injector;
 
 class SpyInterceptorTest extends TestCase
 {
-    public function testSpyLog()
+    public function testSpyInterface(): void
     {
-        $injector = new Injector(new FakeModule, __DIR__ . '/tmp');
+        $injector = new Injector(new class extends AbstractModule
+            {
+            protected function configure()
+            {
+                $this->bind(FakeAddInterface::class)->to(FakeAdd::class);
+                $spyTargets = [
+                    FakeAddInterface::class,
+                ];
+                $this->install(new TestDoubleModule($spyTargets));
+            }
+        }, __DIR__ . '/tmp');
+
         $fake = $injector->getInstance(FakeAddInterface::class);
-        /* @var $fake FakeAdd */
+        $this->assertLog($fake, $injector);
+    }
+
+    public function testSpyClass(): void
+    {
+        $injector = new Injector(new class extends AbstractModule
+        {
+            protected function configure()
+            {
+                $this->bind(FakeAdd::class);
+                $spyTargets = [FakeAdd::class];
+                $this->install(new TestDoubleModule($spyTargets));
+            }
+        }, __DIR__ . '/tmp');
+
+        $fake = $injector->getInstance(FakeAdd::class);
+        $this->assertLog($fake, $injector);
+    }
+
+    private function assertLog($fake, Injector $injector): void
+    {
+        /** @var FakeAdd $fake */
         $spyLog = $injector->getInstance(SpyLog::class);
-        /* @var $spyLog SpyLog */
+        /** @var SpyLog $spyLog */
         $fake->add(1, 2);
         $logs = $spyLog->getLogs(FakeAdd::class, 'add');
         $this->assertCount(1, $logs);
         $log = $logs[0];
-        /* @var $log \Ray\TestDouble\Log */
+        /** @var Log $log */
         $this->assertSame([1, 2], $log->arguments);
         $this->assertSame(1, $log->namedArguments['a']);
         $this->assertIsFloat($log->time);
