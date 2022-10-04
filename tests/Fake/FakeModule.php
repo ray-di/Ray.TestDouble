@@ -17,6 +17,6 @@ class FakeModule extends AbstractModule
         $spyTargets = [
             FakeAddInterface::class
         ];
-        $this->install(new TestDoubleModule($spyTargets));
+        $this->install(new SpyModule($spyTargets));
     }
 }

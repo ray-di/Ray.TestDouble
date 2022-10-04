@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Ray\Di\AbstractModule;
 use Ray\Di\Injector;
 
-class SpyInterceptorTest extends TestCase
+class SpyModuleTest extends TestCase
 {
     public function testSpyInterface(): void
     {
@@ -20,7 +20,7 @@ class SpyInterceptorTest extends TestCase
                 $spyTargets = [
                     FakeAddInterface::class,
                 ];
-                $this->install(new TestDoubleModule($spyTargets));
+                $this->install(new SpyModule($spyTargets));
             }
         }, __DIR__ . '/tmp');
 
@@ -36,7 +36,7 @@ class SpyInterceptorTest extends TestCase
             {
                 $this->bind(FakeAdd::class);
                 $spyTargets = [FakeAdd::class];
-                $this->install(new TestDoubleModule($spyTargets));
+                $this->install(new SpyModule($spyTargets));
             }
         }, __DIR__ . '/tmp');
 

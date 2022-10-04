@@ -13,7 +13,7 @@ use function class_exists;
 use function interface_exists;
 use function is_string;
 
-class TestDoubleModule extends AbstractModule
+class SpyModule extends AbstractModule
 {
     /** @var array<class-string> */
     private $spyTargets;
