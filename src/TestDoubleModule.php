@@ -8,14 +8,17 @@ use Ray\Di\AbstractModule;
 use Ray\Di\Scope;
 use Ray\TestDouble\Exception\InvalidSpyTargetException;
 
+use function assert;
 use function class_exists;
 use function interface_exists;
+use function is_string;
 
 class TestDoubleModule extends AbstractModule
 {
     /** @var array<class-string> */
     private $spyTargets;
 
+    /** @param array<class-string|interface-string> $spyTargets */
     public function __construct(array $spyTargets = [], AbstractModule|null $module = null)
     {
         $this->spyTargets = $spyTargets;
@@ -46,6 +49,8 @@ class TestDoubleModule extends AbstractModule
                 );
                 continue;
             }
+
+            assert(is_string($class));
 
             throw new InvalidSpyTargetException($class);
         }

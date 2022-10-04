@@ -7,16 +7,23 @@ namespace Ray\TestDouble;
 use Ray\Aop\MethodInvocation;
 use ReflectionClass;
 
+use function assert;
 use function microtime;
 
 final class Logger
 {
-    public function log(MethodInvocation $invocation)
+    /** @var array<string, array<string, array<Log>>> */
+    private array $logs = [];
+
+    public function log(MethodInvocation $invocation): mixed
     {
         $t = microtime(true);
+        /** @psalm-suppress MixedAssignment */
         $result = $invocation->proceed();
         $time = microtime(true) - $t;
-        $class =  (new ReflectionClass($invocation->getThis()))->getParentClass()->getName();
+        $parent = (new ReflectionClass($invocation->getThis()))->getParentClass();
+        assert($parent instanceof ReflectionClass);
+        $class =  $parent->getName();
         $method =  $invocation->getMethod()->getName();
         $this->logs[$class][$method][] = new Log(
             (array) $invocation->getArguments(),
@@ -31,7 +38,7 @@ final class Logger
     /**
      * @param class-string $class
      *
-     * @return Log[]
+     * @return array<Log>
      */
     public function getLogs(string $class, string $method): array
     {

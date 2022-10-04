@@ -14,7 +14,7 @@ class SpyInterceptorTest extends TestCase
     {
         $injector = new Injector(new class extends AbstractModule
             {
-            protected function configure()
+            protected function configure(): void
             {
                 $this->bind(FakeAddInterface::class)->to(FakeAdd::class);
                 $spyTargets = [
@@ -32,7 +32,7 @@ class SpyInterceptorTest extends TestCase
     {
         $injector = new Injector(new class extends AbstractModule
         {
-            protected function configure()
+            protected function configure(): void
             {
                 $this->bind(FakeAdd::class);
                 $spyTargets = [FakeAdd::class];
@@ -44,9 +44,8 @@ class SpyInterceptorTest extends TestCase
         $this->assertLog($fake, $injector);
     }
 
-    private function assertLog($fake, Injector $injector): void
+    private function assertLog(FakeAddInterface $fake, Injector $injector): void
     {
-        /** @var FakeAdd $fake */
         $spyLog = $injector->getInstance(Logger::class);
         /** @var Logger $spyLog */
         $fake->add(1, 2);

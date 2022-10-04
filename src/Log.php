@@ -7,9 +7,8 @@ namespace Ray\TestDouble;
 final class Log
 {
     /**
-     * @param class-string          $class
-     * @param array<int, scalar>    $arguments
-     * @param array<string, scalar> $namedArguments
+     * @param array<mixed> $arguments
+     * @param array<mixed> $namedArguments
      */
     public function __construct(
         public array $arguments,
