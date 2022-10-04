@@ -1,22 +1,22 @@
 <?php
-/**
- * This file is part of the Ray.TestDouble package.
- *
- * @license http://opensource.org/licenses/MIT MIT
- */
+
+declare(strict_types=1);
+
 namespace Ray\TestDouble;
 
 use Ray\Di\AbstractModule;
 use Ray\Di\Scope;
+use Ray\TestDouble\Exception\InvalidSpyTargetException;
+
+use function class_exists;
+use function interface_exists;
 
 class TestDoubleModule extends AbstractModule
 {
-    /**
-     * @var array<class-string>
-     */
+    /** @var array<class-string> */
     private $spyTargets;
 
-    public function __construct(array $spyTargets = [], AbstractModule $module = null)
+    public function __construct(array $spyTargets = [], AbstractModule|null $module = null)
     {
         $this->spyTargets = $spyTargets;
         parent::__construct($module);
@@ -28,13 +28,26 @@ class TestDoubleModule extends AbstractModule
     protected function configure()
     {
         $this->bind(SpyLog::class)->in(Scope::SINGLETON);
-        foreach ($this->spyTargets as $interface) {
-            $this->bind($interface)->toNull();
-            $this->bindInterceptor(
-                new IsInterfaceMatcher($interface),
-                $this->matcher->any(),
-                [SpyInterceptor::class]
-            );
+        foreach ($this->spyTargets as $class) {
+            if (interface_exists($class)) {
+                $this->bindInterceptor(
+                    new IsInterfaceMatcher($class),
+                    $this->matcher->any(),
+                    [SpyInterceptor::class],
+                );
+                continue;
+            }
+
+            if (class_exists($class)) {
+                $this->bindInterceptor(
+                    $this->matcher->subclassesOf($class),
+                    $this->matcher->any(),
+                    [SpyInterceptor::class],
+                );
+                continue;
+            }
+
+            throw new InvalidSpyTargetException($class);
         }
     }
 }
