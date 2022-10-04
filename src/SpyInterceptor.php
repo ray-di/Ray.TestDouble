@@ -1,9 +1,7 @@
 <?php
-/**
- * This file is part of the Ray.TestDouble package.
- *
- * @license http://opensource.org/licenses/MIT MIT
- */
+
+declare(strict_types=1);
+
 namespace Ray\TestDouble;
 
 use Ray\Aop\MethodInterceptor;
@@ -11,14 +9,9 @@ use Ray\Aop\MethodInvocation;
 
 class SpyInterceptor implements MethodInterceptor
 {
-    /**
-     * @var Spy
-     */
-    private $spy;
-
-    public function __construct(Spy $spy)
-    {
-        $this->spy = $spy;
+    public function __construct(
+        private LoggerInterface $spyLog,
+    ) {
     }
 
     /**
@@ -26,6 +19,6 @@ class SpyInterceptor implements MethodInterceptor
      */
     public function invoke(MethodInvocation $invocation)
     {
-        return $this->spy->proceed($invocation);
+        return $this->spyLog->log($invocation);
     }
 }

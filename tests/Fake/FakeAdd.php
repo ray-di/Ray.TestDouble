@@ -6,10 +6,10 @@
  */
 namespace Ray\TestDouble;
 
-class FakeTestClass
+class FakeAdd implements FakeAddInterface
 {
-    public function output()
+    public function add(int $a, int $b): int
     {
-        return 'fake class output';
+        return $a + $b;
     }
 }

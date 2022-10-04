@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1664855861">
+  <project timestamp="1664855861">
+    <file name="/Users/akihito/git/Ray.TestDouble/src/IsInterfaceMatcher.php">
+      <class name="Ray\TestDouble\IsInterfaceMatcher" namespace="global">
+        <metrics complexity="2" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="3" elements="6" coveredelements="4"/>
+      </class>
+      <line num="13" type="method" name="matchesClass" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="15" type="stmt" count="1"/>
+      <line num="16" type="stmt" count="1"/>
+      <line num="18" type="stmt" count="1"/>
+      <line num="24" type="method" name="matchesMethod" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="26" type="stmt" count="0"/>
+      <metrics loc="29" ncloc="23" classes="1" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="3" elements="6" coveredelements="4"/>
+    </file>
+    <file name="/Users/akihito/git/Ray.TestDouble/src/Log.php">
+      <class name="Ray\TestDouble\Log" namespace="global">
+        <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
+      </class>
+      <line num="16" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="1"/>
+      <metrics loc="23" ncloc="13" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
+    </file>
+    <file name="/Users/akihito/git/Ray.TestDouble/src/SpyInterceptor.php">
+      <class name="Ray\TestDouble\SpyInterceptor" namespace="global">
+        <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
+      </class>
+      <line num="14" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="21" type="method" name="invoke" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="23" type="stmt" count="1"/>
+      <metrics loc="26" ncloc="18" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
+    </file>
+    <file name="/Users/akihito/git/Ray.TestDouble/src/SpyLog.php">
+      <class name="Ray\TestDouble\SpyLog" namespace="global">
+        <metrics complexity="3" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="11" elements="14" coveredelements="12"/>
+      </class>
+      <line num="13" type="method" name="log" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="15" type="stmt" count="1"/>
+      <line num="16" type="stmt" count="1"/>
+      <line num="17" type="stmt" count="1"/>
+      <line num="18" type="stmt" count="1"/>
+      <line num="19" type="stmt" count="1"/>
+      <line num="20" type="stmt" count="1"/>
+      <line num="21" type="stmt" count="1"/>
+      <line num="22" type="stmt" count="1"/>
+      <line num="27" type="stmt" count="1"/>
+      <line num="35" type="method" name="getLogs" visibility="public" complexity="2" crap="2.15" count="1"/>
+      <line num="37" type="stmt" count="1"/>
+      <line num="38" type="stmt" count="0"/>
+      <line num="41" type="stmt" count="1"/>
+      <metrics loc="44" ncloc="34" classes="1" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="11" elements="14" coveredelements="12"/>
+    </file>
+    <file name="/Users/akihito/git/Ray.TestDouble/src/TestDoubleModule.php">
+      <class name="Ray\TestDouble\TestDoubleModule" namespace="global">
+        <metrics complexity="3" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="11" coveredelements="11"/>
+      </class>
+      <line num="19" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="21" type="stmt" count="1"/>
+      <line num="22" type="stmt" count="1"/>
+      <line num="28" type="method" name="configure" visibility="protected" complexity="2" crap="2" count="1"/>
+      <line num="30" type="stmt" count="1"/>
+      <line num="31" type="stmt" count="1"/>
+      <line num="32" type="stmt" count="1"/>
+      <line num="33" type="stmt" count="1"/>
+      <line num="34" type="stmt" count="1"/>
+      <line num="35" type="stmt" count="1"/>
+      <line num="36" type="stmt" count="1"/>
+      <metrics loc="41" ncloc="30" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="11" coveredelements="11"/>
+    </file>
+    <metrics files="5" loc="163" ncloc="118" classes="5" methods="9" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="28" coveredstatements="26" elements="37" coveredelements="33"/>
+  </project>
+</coverage>

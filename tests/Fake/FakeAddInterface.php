@@ -4,12 +4,9 @@
  *
  * @license http://opensource.org/licenses/MIT MIT
  */
-namespace Ray\TestDouble\Annotation;
+namespace Ray\TestDouble;
 
-/**
- * @Annotation
- * @Target("CLASS")
- */
-final class Fakeable
+interface FakeAddInterface
 {
+    public function add(int $a, int $b): int;
 }

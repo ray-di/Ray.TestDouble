@@ -1,56 +1,35 @@
 <?php
-/**
- * This file is part of the Ray.TestDouble package.
- *
- * @license http://opensource.org/licenses/MIT MIT
- */
+
+declare(strict_types=1);
+
 namespace Ray\TestDouble;
 
-use Ray\Aop\MethodInvocation;
+use Ray\Aop\Bind;
+use Ray\Aop\Weaver;
+
+use function sys_get_temp_dir;
 
 final class Spy
 {
-    /**
-     * @var array
-     */
-    private $logs = [];
+    private string $tmpDir;
 
-    public function proceed(MethodInvocation $invocation)
+    public function __construct(string|null $tmpDir = null)
     {
-        $t = microtime(true);
-        $result = $invocation->proceed();
-        $time = microtime(true) - $t;
-        $spyLog = new SpyLog;
-        list(
-            $spyLog->class,
-            $spyLog->method,
-            $spyLog->arguments,
-            $spyLog->result,
-            $spyLog->time
-        ) = [
-            (new \ReflectionClass($invocation->getThis()))->getParentClass()->getName(),
-            $invocation->getMethod()->getName(),
-            $invocation->getArguments()->getArrayCopy(),
-            $result,
-            $time
-        ];
-        $this->logs[$spyLog->class][$spyLog->method][] = $spyLog;
-
-        return $result;
+        $this->tmpDir = $tmpDir ?? sys_get_temp_dir();
     }
 
     /**
-     * @param string $class
-     * @param string $name
+     * @param class-string<T> $class
      *
-     * @return SpyLog[]
+     * @return T
+     *
+     * @template T of object
      */
-    public function getLogs($class, $name)
+    public function newInstance(string $class, string $method, Logger $spyLog): object
     {
-        if (! isset($this->logs[$class][$name])) {
-            return [];
-        }
+        $bind = (new Bind())->bindInterceptors($method, [new SpyInterceptor($spyLog)]);
+        $compiler = new Weaver($bind, $this->tmpDir);
 
-        return $this->logs[$class][$name];
+        return $compiler->newInstance($class, []);
     }
 }
