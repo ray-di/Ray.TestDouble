@@ -6,15 +6,16 @@
  */
 namespace Ray\TestDouble;
 
+use Ray\Aop\FakeInterceptor;
 use Ray\Di\AbstractModule;
 
-class ClassNameBindingsModule extends AbstractModule
+class FakeModule extends AbstractModule
 {
     protected function configure()
     {
-        $this->bind(FakeTarget::class);
+        $this->bind(FakeAddInterface::class)->to(FakeAdd::class);
         $spyTargets = [
-            FakeTarget::class
+            FakeAddInterface::class
         ];
         $this->install(new TestDoubleModule($spyTargets));
     }

@@ -11,21 +11,15 @@ use Ray\Aop\MethodInvocation;
 
 class SpyInterceptor implements MethodInterceptor
 {
-    /**
-     * @var Spy
-     */
-    private $spy;
-
-    public function __construct(Spy $spy)
-    {
-        $this->spy = $spy;
-    }
+    public function __construct(
+        private SpyLog $spyLog
+    ){}
 
     /**
      * {@inheritdoc}
      */
     public function invoke(MethodInvocation $invocation)
     {
-        return $this->spy->proceed($invocation);
+        return $this->spyLog->log($invocation);
     }
 }

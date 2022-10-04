@@ -4,5 +4,9 @@
  *
  * @license http://opensource.org/licenses/MIT MIT
  */
-require __DIR__ . '/src/Annotation/Fakeable.php';
-require __DIR__ . '/src/Annotation/Spy.php';
+namespace Ray\TestDouble;
+
+interface FakeAddInterface
+{
+    public function add(int $a, int $b): int;
+}

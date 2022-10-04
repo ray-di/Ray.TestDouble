@@ -6,9 +6,9 @@
  */
 namespace Ray\TestDouble;
 
-class FakeTarget
+class FakeAdd implements FakeAddInterface
 {
-    public function exec($a, $b)
+    public function add(int $a, int $b): int
     {
         return $a + $b;
     }

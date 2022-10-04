@@ -12,13 +12,13 @@ use Ray\Di\Scope;
 class TestDoubleModule extends AbstractModule
 {
     /**
-     * @var array
+     * @var array<class-string>
      */
     private $spyTargets;
 
-    public function __construct(array $spies = [], AbstractModule $module = null)
+    public function __construct(array $spyTargets = [], AbstractModule $module = null)
     {
-        $this->spyTargets = $spies;
+        $this->spyTargets = $spyTargets;
         parent::__construct($module);
     }
 
@@ -27,10 +27,11 @@ class TestDoubleModule extends AbstractModule
      */
     protected function configure()
     {
-        $this->bind(Spy::class)->in(Scope::SINGLETON);
-        foreach ($this->spyTargets as $spy) {
+        $this->bind(SpyLog::class)->in(Scope::SINGLETON);
+        foreach ($this->spyTargets as $interface) {
+            $this->bind($interface)->toNull();
             $this->bindInterceptor(
-                $this->matcher->subclassesOf($spy),
+                new IsInterfaceMatcher($interface),
                 $this->matcher->any(),
                 [SpyInterceptor::class]
             );

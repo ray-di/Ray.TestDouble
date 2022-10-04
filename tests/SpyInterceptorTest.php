@@ -11,22 +11,20 @@ use Ray\Di\Injector;
 
 class SpyInterceptorTest extends TestCase
 {
-    public function testSpy()
+    public function testSpyLog()
     {
-        $injector = new Injector(new ClassNameBindingsModule, __DIR__ . '/tmp');
-        $fake = $injector->getInstance(FakeTarget::class);
-        /* @var $fake FakeTarget */
-        $spy = $injector->getInstance(Spy::class);
-        /* @var $spy Spy */
-        $fake->exec(1, 2);
-        $logs = $spy->getLogs(FakeTarget::class, 'exec');
+        $injector = new Injector(new FakeModule, __DIR__ . '/tmp');
+        $fake = $injector->getInstance(FakeAddInterface::class);
+        /* @var $fake FakeAdd */
+        $spyLog = $injector->getInstance(SpyLog::class);
+        /* @var $spyLog SpyLog */
+        $fake->add(1, 2);
+        $logs = $spyLog->getLogs(FakeAdd::class, 'add');
         $this->assertCount(1, $logs);
         $log = $logs[0];
-        /* @var $log \Ray\TestDouble\SpyLog */
-        $this->assertSame(FakeTarget::class, $log->class);
-        $this->assertSame('exec', $log->method);
+        /* @var $log \Ray\TestDouble\Log */
         $this->assertSame([1, 2], $log->arguments);
-        $this->assertSame(3, $log->result);
+        $this->assertSame(1, $log->namedArguments['a']);
         $this->assertIsFloat($log->time);
     }
 }

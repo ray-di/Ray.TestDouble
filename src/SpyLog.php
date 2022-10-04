@@ -6,30 +6,38 @@
  */
 namespace Ray\TestDouble;
 
+use Ray\Aop\MethodInvocation;
+
 final class SpyLog
 {
-    /**
-     * @var string
-     */
-    public $class;
+    public function log(MethodInvocation $invocation)
+    {
+        $t = microtime(true);
+        $result = $invocation->proceed();
+        $time = microtime(true) - $t;
+        $class =  (new \ReflectionClass($invocation->getThis()))->getParentClass()->getName();
+        $method =  $invocation->getMethod()->getName();
+        $this->logs[$class][$method][] = new Log(
+            (array) $invocation->getArguments(),
+            (array) $invocation->getNamedArguments(),
+            $result,
+            $time
+        );
+
+        return $result;
+    }
 
     /**
-     * @var string
+     * @param class-string $class
+     *
+     * @return Log[]
      */
-    public $method;
+    public function getLogs(string $class, string $method): array
+    {
+        if (! isset($this->logs[$class][$method])) {
+            return [];
+        }
 
-    /**
-     * @var array
-     */
-    public $arguments;
-
-    /**
-     * @var mixed
-     */
-    public $result;
-
-    /**
-     * @var float
-     */
-    public $time;
+        return $this->logs[$class][$method];
+    }
 }
