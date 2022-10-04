@@ -9,7 +9,7 @@ use ReflectionClass;
 
 use function microtime;
 
-final class SpyLog
+final class Logger
 {
     public function log(MethodInvocation $invocation)
     {

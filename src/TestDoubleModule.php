@@ -27,7 +27,7 @@ class TestDoubleModule extends AbstractModule
      */
     protected function configure()
     {
-        $this->bind(SpyLog::class)->in(Scope::SINGLETON);
+        $this->bind(Logger::class)->in(Scope::SINGLETON);
         foreach ($this->spyTargets as $class) {
             if (interface_exists($class)) {
                 $this->bindInterceptor(

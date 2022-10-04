@@ -47,8 +47,8 @@ class SpyInterceptorTest extends TestCase
     private function assertLog($fake, Injector $injector): void
     {
         /** @var FakeAdd $fake */
-        $spyLog = $injector->getInstance(SpyLog::class);
-        /** @var SpyLog $spyLog */
+        $spyLog = $injector->getInstance(Logger::class);
+        /** @var Logger $spyLog */
         $fake->add(1, 2);
         $logs = $spyLog->getLogs(FakeAdd::class, 'add');
         $this->assertCount(1, $logs);
