@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Ray\TestDouble;
 
 use Ray\Di\AbstractModule;
-use Ray\Di\Scope;
 use Ray\TestDouble\Exception\InvalidSpyTargetException;
 
 use function assert;
@@ -30,7 +29,7 @@ class SpyModule extends AbstractModule
      */
     protected function configure()
     {
-        $this->bind(Logger::class)->in(Scope::SINGLETON);
+        $this->install(new SpyBaseModule());
         foreach ($this->spyTargets as $class) {
             if (interface_exists($class)) {
                 $this->bindInterceptor(

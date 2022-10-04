@@ -44,9 +44,27 @@ class SpyModuleTest extends TestCase
         $this->assertLog($fake, $injector);
     }
 
+    public function testInterceptor(): void
+    {
+        $injector = new Injector(new class extends AbstractModule
+        {
+            protected function configure(): void
+            {
+                $this->install(new SpyBaseModule());
+                $this->bindInterceptor(
+                    $this->matcher->any(),
+                    $this->matcher->startsWith('add'),
+                    [SpyInterceptor::class],
+                );
+            }
+        }, __DIR__ . '/tmp');
+        $fake = $injector->getInstance(FakeAdd::class);
+        $this->assertLog($fake, $injector);
+    }
+
     private function assertLog(FakeAddInterface $fake, Injector $injector): void
     {
-        $spyLog = $injector->getInstance(Logger::class);
+        $spyLog = $injector->getInstance(LoggerInterface::class);
         /** @var Logger $spyLog */
         $fake->add(1, 2);
         $logs = $spyLog->getLogs(FakeAdd::class, 'add');

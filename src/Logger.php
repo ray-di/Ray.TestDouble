@@ -10,7 +10,7 @@ use ReflectionClass;
 use function assert;
 use function microtime;
 
-final class Logger
+final class Logger implements LoggerInterface
 {
     /** @var array<string, array<string, array<Log>>> */
     private array $logs = [];

@@ -10,7 +10,7 @@ use Ray\Aop\MethodInvocation;
 class SpyInterceptor implements MethodInterceptor
 {
     public function __construct(
-        private Logger $spyLog,
+        private LoggerInterface $spyLog,
     ) {
     }
 
