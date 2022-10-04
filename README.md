@@ -1,25 +1,14 @@
 # Ray.TestDouble
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ray-di/Ray.TestDouble/badges/quality-score.png?b=1.x)](https://scrutinizer-ci.com/g/ray-di/Ray.TestDouble/?branch=1.x)
-[![Code Coverage](https://scrutinizer-ci.com/g/ray-di/Ray.TestDouble/badges/coverage.png?b=1.x)](https://scrutinizer-ci.com/g/ray-di/Ray.TestDouble/?branch=1.x)
+[![Continuous Integration](https://github.com/ray-di/Ray.TestDouble/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/ray-di/Ray.TestDouble/actions/workflows/continuous-integration.yml)
 
-An AOP powered test double framework
+An AOP powered test double library for PHP
 
 ## Installation
 
 ### Composer install
 
     $ composer require ray/test-double --dev
-
-### Module install
-
-```php
-$targets = [
-    Foo::class,           // Spy targets
-    BarInterface::class,
-];
-$this->install(new TestDoubleModule($targets));
-
-```
 
 # What is Spy?
 
@@ -57,7 +46,7 @@ $spy = $injector->getInstance(Foo::class);
 
 ### By Matcher
 
-Specify the spying target using the Ray.Aop matcher.
+Specify the spying target using the [Ray.Aop matcher](https://github.com/ray-di/Ray.Aop/blob/2.x/src/MatcherInterface.php).
 
 ```php
 $injector = new Injector(new class extends AbstractModule
@@ -66,8 +55,8 @@ $injector = new Injector(new class extends AbstractModule
     {
         $this->install(new SpyBaseModule());
         $this->bindInterceptor(
-            $this->matcher->any(),
-            $this->matcher->startsWith('add'),
+            $this->matcher->any(),             // any class
+            $this->matcher->startsWith('add'), // methods startWith 'add'
             [SpyInterceptor::class]
         );
     }
@@ -79,7 +68,7 @@ $spy = $injector->getInstance(Foo::class);
 
 ## Assertion
 
-`SpyLog::get($className, $methodName)`でログを取得してアサーションを行います。
+`SpyLog::get($className, $methodName)` to get the log and make assertions.
 
 ```php
 public function testSpy()
