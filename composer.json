@@ -17,10 +17,8 @@
         "vimeo/psalm": "^4.27"
     },
     "keywords":[
-        "Ray module",
-        "Mock",
-        "Stub",
-        "Fake"
+        "test double",
+        "spy"
     ],
     "license": "MIT",
     "authors": [
