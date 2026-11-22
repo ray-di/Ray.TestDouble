@@ -24,6 +24,6 @@ class SpyTest extends TestCase
         /** @var Log $log */
         $this->assertSame([1, 2], $log->arguments);
         $this->assertSame(1, $log->namedArguments['a']);
-        $this->assertIsFloat($log->time);
+        $this->assertGreaterThanOrEqual(0.0, $log->time);
     }
 }

@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Ray\TestDouble;
 
+use Override;
 use Ray\Di\AbstractModule;
 use Ray\TestDouble\Exception\InvalidSpyTargetException;
 
-use function assert;
 use function class_exists;
 use function interface_exists;
-use function is_string;
 
+/** @psalm-api */
 class SpyModule extends AbstractModule
 {
     /** @var array<class-string> */
@@ -21,12 +21,11 @@ class SpyModule extends AbstractModule
     public function __construct(array $spyTargets = [], AbstractModule|null $module = null)
     {
         $this->spyTargets = $spyTargets;
+
         parent::__construct($module);
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    #[Override]
     protected function configure()
     {
         $this->install(new SpyBaseModule());
@@ -48,8 +47,6 @@ class SpyModule extends AbstractModule
                 );
                 continue;
             }
-
-            assert(is_string($class));
 
             throw new InvalidSpyTargetException($class);
         }

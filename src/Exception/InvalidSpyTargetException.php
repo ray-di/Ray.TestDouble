@@ -6,6 +6,7 @@ namespace Ray\TestDouble\Exception;
 
 use LogicException;
 
+/** @psalm-api */
 class InvalidSpyTargetException extends LogicException
 {
 }

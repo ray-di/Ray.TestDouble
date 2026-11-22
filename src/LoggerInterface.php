@@ -8,5 +8,6 @@ use Ray\Aop\MethodInvocation;
 
 interface LoggerInterface
 {
+    /** @param MethodInvocation<object> $invocation */
     public function log(MethodInvocation $invocation): mixed;
 }

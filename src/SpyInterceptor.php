@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Ray\TestDouble;
 
+use Override;
 use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
 
+/** @psalm-api */
 class SpyInterceptor implements MethodInterceptor
 {
     public function __construct(
@@ -14,9 +16,8 @@ class SpyInterceptor implements MethodInterceptor
     ) {
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** @return mixed */
+    #[Override]
     public function invoke(MethodInvocation $invocation)
     {
         return $this->spyLog->log($invocation);

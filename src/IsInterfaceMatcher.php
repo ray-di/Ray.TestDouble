@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace Ray\TestDouble;
 
+use Override;
 use Ray\Aop\AbstractMatcher;
 use ReflectionClass;
 use ReflectionMethod;
 
 use function in_array;
 
+/** @psalm-api */
 class IsInterfaceMatcher extends AbstractMatcher
 {
-    /**
-     * {@inheritdoc}
-     */
+    #[Override]
     public function matchesClass(ReflectionClass $class, array $arguments): bool
     {
         [$interface] = $arguments;
@@ -23,11 +23,8 @@ class IsInterfaceMatcher extends AbstractMatcher
         return in_array($interface, $interfaces);
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @codeCoverageIgnore
-     */
+    /** @codeCoverageIgnore */
+    #[Override]
     public function matchesMethod(ReflectionMethod $method, array $arguments): bool
     {
         return true;
