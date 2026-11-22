@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Ray\TestDouble;
 
-use Override;
 use Ray\Aop\MethodInvocation;
 use ReflectionClass;
 
@@ -17,7 +16,6 @@ final class Logger implements LoggerInterface
     private array $logs = [];
 
     /** @param MethodInvocation<object> $invocation */
-    #[Override]
     public function log(MethodInvocation $invocation): mixed
     {
         $t = microtime(true);

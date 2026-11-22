@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Ray\TestDouble;
 
-use Override;
 use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
 
@@ -16,8 +15,9 @@ class SpyInterceptor implements MethodInterceptor
     ) {
     }
 
-    /** @return mixed */
-    #[Override]
+    /**
+     * {@inheritDoc}
+     */
     public function invoke(MethodInvocation $invocation)
     {
         return $this->spyLog->log($invocation);

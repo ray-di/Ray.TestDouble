@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Ray\TestDouble;
 
-use Override;
 use Ray\Di\AbstractModule;
 use Ray\TestDouble\Exception\InvalidSpyTargetException;
 
@@ -25,7 +24,9 @@ class SpyModule extends AbstractModule
         parent::__construct($module);
     }
 
-    #[Override]
+    /**
+     * {@inheritDoc}
+     */
     protected function configure()
     {
         $this->install(new SpyBaseModule());

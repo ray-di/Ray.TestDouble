@@ -13,4 +13,8 @@
             <directory name="vendor" />
         </ignoreFiles>
     </projectFiles>
+    <issueHandlers>
+        <!-- #[Override] does not exist on PHP 8.2, and older Ray.Aop instantiates method attributes -->
+        <MissingOverrideAttribute errorLevel="suppress"/>
+    </issueHandlers>
 </psalm>
