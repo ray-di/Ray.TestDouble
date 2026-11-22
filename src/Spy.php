@@ -7,19 +7,25 @@ namespace Ray\TestDouble;
 use Ray\Aop\Bind;
 use Ray\Aop\Weaver;
 
+use function assert;
 use function sys_get_temp_dir;
 
 final class Spy
 {
+    /** @var non-empty-string */
     private string $tmpDir;
 
+    /** @param non-empty-string|null $tmpDir */
     public function __construct(string|null $tmpDir = null)
     {
-        $this->tmpDir = $tmpDir ?? sys_get_temp_dir();
+        $tmpDir ??= sys_get_temp_dir();
+        assert($tmpDir !== '');
+        $this->tmpDir = $tmpDir;
     }
 
     /**
-     * @param class-string<T> $class
+     * @param class-string<T>  $class
+     * @param non-empty-string $method
      *
      * @return T
      *

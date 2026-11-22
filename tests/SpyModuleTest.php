@@ -51,6 +51,7 @@ class SpyModuleTest extends TestCase
         {
             protected function configure(): void
             {
+                $this->bind(FakeAdd::class);
                 $this->install(new SpyBaseModule());
                 $this->bindInterceptor(
                     $this->matcher->any(),
@@ -80,7 +81,7 @@ class SpyModuleTest extends TestCase
         /** @var Log $log */
         $this->assertSame([1, 2], $log->arguments);
         $this->assertSame(1, $log->namedArguments['a']);
-        $this->assertIsFloat($log->time);
+        $this->assertGreaterThanOrEqual(0.0, $log->time);
         $this->assertSame([], $spyLog->getLogs(FakeAdd::class, '__toString'));
     }
 }

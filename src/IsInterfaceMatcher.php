@@ -10,10 +10,11 @@ use ReflectionMethod;
 
 use function in_array;
 
+/** @psalm-api */
 class IsInterfaceMatcher extends AbstractMatcher
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function matchesClass(ReflectionClass $class, array $arguments): bool
     {
@@ -24,7 +25,7 @@ class IsInterfaceMatcher extends AbstractMatcher
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @codeCoverageIgnore
      */

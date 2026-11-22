@@ -15,6 +15,7 @@ final class Logger implements LoggerInterface
     /** @var array<string, array<string, array<Log>>> */
     private array $logs = [];
 
+    /** @param MethodInvocation<object> $invocation */
     public function log(MethodInvocation $invocation): mixed
     {
         $t = microtime(true);

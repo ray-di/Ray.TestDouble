@@ -7,3 +7,4 @@
 /.phpunit.cache
 /coverage.xml
 /tests/tmp
+/vendor-bin/**/vendor

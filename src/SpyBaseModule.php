@@ -10,7 +10,7 @@ use Ray\Di\Scope;
 final class SpyBaseModule extends AbstractModule
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function configure()
     {

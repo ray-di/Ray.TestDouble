@@ -7,6 +7,7 @@ namespace Ray\TestDouble;
 use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;
 
+/** @psalm-api */
 class SpyInterceptor implements MethodInterceptor
 {
     public function __construct(
@@ -15,7 +16,7 @@ class SpyInterceptor implements MethodInterceptor
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function invoke(MethodInvocation $invocation)
     {
